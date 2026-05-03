@@ -1,8 +1,9 @@
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from datetime import datetime, timezone
 import json
 from pathlib import Path
+from collections import Counter
 
 
 app = FastAPI()
@@ -43,6 +44,7 @@ class NoteCreate(BaseModel):
     title: str
     content: str
     category: str
+    tags: list[str] = Field(default_factory=list)
 
 
 class Note(BaseModel):
@@ -51,6 +53,10 @@ class Note(BaseModel):
     content: str
     category: str
     created_at: str
+    tags: list[str] = Field(default_factory=list)
+    
+
+
 
 
 NOTES_FILE = Path("data/notes.json")
@@ -93,6 +99,7 @@ def create_note(note: NoteCreate) -> Note:
         title=note.title,
         content=note.content,
         category=note.category,
+        tags=note.tags,
         created_at=datetime.now(timezone.utc).isoformat(),
     )
 
@@ -156,3 +163,49 @@ def delete_note(note_id: int):
             return {"message": "Note deleted"}
 
     raise HTTPException(status_code=404, detail="Note not found")
+
+
+
+
+
+
+#Tag 3 
+
+@app.get("/queryparameters")
+def query_parameters(param1: str = None, param2: int = None) -> dict:
+
+    namen = ["Alice", "Bob", "Charlie", "David", "Eve"]
+
+    if not param1:
+        return{"namen": namen}
+    
+
+    name_gefiltert = []
+    for name in namen:
+        if param1 and param1 in name:
+            name_gefiltert.append(name)
+            
+
+    return {
+        "param1": param1,
+        "param2": param2,
+        "namen": name_gefiltert
+    }
+
+
+@app.get("/notes/stats")
+def get_note_stats():
+    notes_db, _ = load_notes()
+
+    categories = {}
+
+    for note in notes_db:
+        if note.category in categories:
+            categories[note.category] += 1
+        else:
+            categories[note.category] = 1
+
+    return {
+        "total_notes": len(notes_db),
+        "by_category": categories
+    }
