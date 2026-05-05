@@ -3,10 +3,14 @@ from datetime import datetime, timezone
 import json
 from pathlib import Path
 from typing import Annotated, Optional
+from pydantic import field_validator
+
 
 from fastapi import Depends, FastAPI, HTTPException
 from pydantic import BaseModel, ConfigDict, Field as PydanticField
 from sqlmodel import Field, Relationship, SQLModel, Session, create_engine, select
+from pydantic import BaseModel, ConfigDict, Field as PydanticField, field_validator, model_validator
+
 
 
 app = FastAPI(
@@ -80,26 +84,181 @@ class Tag(SQLModel, table=True):
     __tablename__ = "tags"
 
     id: Optional[int] = Field(default=None, primary_key=True)
-    name: str = Field(unique=True, index=True)
+    name: str = Field(
+        min_length=2,
+        max_length=30,
+        pattern=r"^[a-z0-9-]+$",
+        unique=True,
+        index=True,
+    )
 
     notes: list[Note] = Relationship(
         back_populates="tags",
         link_model=NoteTagLink,
     )
 
+    @field_validator("name", mode="before")
+    @classmethod
+    def normalize_name(cls, value: str) -> str:
+        return value.strip().lower()
+
+
+
+
+ALLOWED_CATEGORIES = {"work", "personal", "school", "ideas", "general"}
+
 
 class NoteCreate(BaseModel):
-    title: str
-    content: str
-    category: str
-    tags: list[str] = PydanticField(default_factory=list)
+    model_config = ConfigDict(
+        str_strip_whitespace=True,
+        extra="forbid",
+    )
+
+
+title: str = PydanticField(
+        min_length=3,
+        max_length=100,
+        description="Short note title shown in lists",
+        examples=["Shopping list", "Meeting prep"],
+    )
+content: str = PydanticField(
+        min_length=1,
+        max_length=10_000,
+        description="Main note content",
+        examples=["Buy milk, bread and apples"],
+    )
+category: str = PydanticField(
+        min_length=2,
+        max_length=30,
+        pattern=r"^[a-z]+$",
+        description="Lowercase category, e.g. work, personal, school",
+        examples=["work"],
+    )
+tags: list[str] = PydanticField(
+        default_factory=list,
+        max_length=10,
+        description="Up to 10 tags, normalized to lowercase",
+        examples=[["urgent", "meeting"]],
+    )
+
+@field_validator("title")
+@classmethod
+def title_must_not_be_blank(cls, value: str) -> str:
+        if not value.strip():
+            raise ValueError("title must not be empty or whitespace")
+        return value
+
+@field_validator("category", mode="before")
+@classmethod
+def normalize_and_validate_category(cls, value: str) -> str:
+        normalized = value.strip().lower()
+        if normalized not in ALLOWED_CATEGORIES:
+            raise ValueError(
+                f"category must be one of: {', '.join(sorted(ALLOWED_CATEGORIES))}"
+            )
+        return normalized
+
+@field_validator("tags")
+@classmethod
+def normalize_tags(cls, value: list[str]) -> list[str]:
+        normalized_tags = []
+        seen = set()
+
+        for tag in value:
+            normalized = tag.strip().lower()
+
+            if not normalized:
+                raise ValueError("tags must not contain empty values")
+            if len(normalized) < 2:
+                raise ValueError("tags must be at least 2 characters long")
+            if normalized in seen:
+                continue
+
+            seen.add(normalized)
+            normalized_tags.append(normalized)
+
+        return normalized_tags
+
+@model_validator(mode="after")
+def validate_work_note_has_work_tag(self):
+        # model_validator is needed here because this rule depends on
+        # both category and tags at the same time.
+        if self.category == "work" and "work" not in self.tags:
+            raise ValueError("work notes must include the 'work' tag")
+        return self
+
+
+
 
 
 class NoteUpdate(BaseModel):
-    title: Optional[str] = None
-    content: Optional[str] = None
-    category: Optional[str] = None
-    tags: Optional[list[str]] = None
+    model_config = ConfigDict(
+        str_strip_whitespace=True,
+        extra="forbid",
+    )
+
+    title: str | None = PydanticField(default=None, min_length=3, max_length=100)
+    content: str | None = PydanticField(default=None, min_length=1, max_length=10_000)
+    category: str | None = PydanticField(
+        default=None,
+        min_length=2,
+        max_length=30,
+        pattern=r"^[a-z]+$",
+    )
+    tags: list[str] | None = PydanticField(default=None, max_length=10)
+
+    @field_validator("title")
+    @classmethod
+    def title_must_not_be_blank(cls, value: str | None) -> str | None:
+        if value is None:
+            return value
+        if not value.strip():
+            raise ValueError("title must not be empty or whitespace")
+        return value
+
+    @field_validator("category", mode="before")
+    @classmethod
+    def normalize_and_validate_category(cls, value: str | None) -> str | None:
+        if value is None:
+            return value
+
+        normalized = value.strip().lower()
+        if normalized not in ALLOWED_CATEGORIES:
+            raise ValueError(
+                f"category must be one of: {', '.join(sorted(ALLOWED_CATEGORIES))}"
+            )
+        return normalized
+
+    @field_validator("tags")
+    @classmethod
+    def normalize_tags(cls, value: list[str] | None) -> list[str] | None:
+        if value is None:
+            return value
+
+        normalized_tags = []
+        seen = set()
+
+        for tag in value:
+            normalized = tag.strip().lower()
+
+            if not normalized:
+                raise ValueError("tags must not contain empty values")
+            if len(normalized) < 2:
+                raise ValueError("tags must be at least 2 characters long")
+            if normalized in seen:
+                continue
+
+            seen.add(normalized)
+            normalized_tags.append(normalized)
+
+        return normalized_tags
+
+    @model_validator(mode="after")
+    def validate_work_note_has_work_tag(self):
+        if self.category == "work" and self.tags is not None and "work" not in self.tags:
+            raise ValueError("work notes must include the 'work' tag")
+        return self
+
 
 
 class NoteResponse(BaseModel):
