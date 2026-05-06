@@ -2,14 +2,13 @@ from collections import Counter
 from datetime import datetime, timezone
 import json
 from pathlib import Path
+import re
 from typing import Annotated, Optional
-from pydantic import field_validator
 
 
 from fastapi import Depends, FastAPI, HTTPException
-from pydantic import BaseModel, ConfigDict, Field as PydanticField
-from sqlmodel import Field, Relationship, SQLModel, Session, create_engine, select
 from pydantic import BaseModel, ConfigDict, Field as PydanticField, field_validator, model_validator
+from sqlmodel import Field, Relationship, SQLModel, Session, create_engine, select
 
 
 
@@ -84,15 +83,9 @@ class Tag(SQLModel, table=True):
     __tablename__ = "tags"
 
     id: Optional[int] = Field(default=None, primary_key=True)
-    name: str = Field(
-        min_length=2,
-        max_length=30,
-        pattern=r"^[a-z0-9-]+$",
-        unique=True,
-        index=True,
-    )
+    name: str = Field(unique=True, index=True)
 
-    notes: list[Note] = Relationship(
+    notes: list["Note"] = Relationship(
         back_populates="tags",
         link_model=NoteTagLink,
     )
@@ -101,6 +94,18 @@ class Tag(SQLModel, table=True):
     @classmethod
     def normalize_name(cls, value: str) -> str:
         return value.strip().lower()
+
+
+    @field_validator("name")
+    @classmethod
+    def validate_name(cls, value: str) -> str:
+        if len(value) < 2 or len(value) > 30:
+            raise ValueError("name must be 2 to 30 characters long")
+
+        if not re.fullmatch(r"^[a-z0-9-]+$", value):
+            raise ValueError("name must contain only lowercase letters, digits, and dashes")
+
+        return value
 
 
 
