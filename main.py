@@ -93,6 +93,8 @@ class Tag(SQLModel, table=True):
     @field_validator("name", mode="before")
     @classmethod
     def normalize_name(cls, value: str) -> str:
+        if not isinstance(value, str):
+            raise ValueError("name must be a string")
         return value.strip().lower()
 
 
@@ -119,43 +121,44 @@ class NoteCreate(BaseModel):
         extra="forbid",
     )
 
-
-title: str = PydanticField(
+    title: str = PydanticField(
         min_length=3,
         max_length=100,
         description="Short note title shown in lists",
         examples=["Shopping list", "Meeting prep"],
     )
-content: str = PydanticField(
+    content: str = PydanticField(
         min_length=1,
         max_length=10_000,
         description="Main note content",
         examples=["Buy milk, bread and apples"],
     )
-category: str = PydanticField(
+    category: str = PydanticField(
         min_length=2,
         max_length=30,
         pattern=r"^[a-z]+$",
         description="Lowercase category, e.g. work, personal, school",
         examples=["work"],
     )
-tags: list[str] = PydanticField(
+    tags: list[str] = PydanticField(
         default_factory=list,
         max_length=10,
         description="Up to 10 tags, normalized to lowercase",
         examples=[["urgent", "meeting"]],
     )
 
-@field_validator("title")
-@classmethod
-def title_must_not_be_blank(cls, value: str) -> str:
+    @field_validator("title")
+    @classmethod
+    def title_must_not_be_blank(cls, value: str) -> str:
         if not value.strip():
             raise ValueError("title must not be empty or whitespace")
         return value
 
-@field_validator("category", mode="before")
-@classmethod
-def normalize_and_validate_category(cls, value: str) -> str:
+    @field_validator("category", mode="before")
+    @classmethod
+    def normalize_and_validate_category(cls, value: str) -> str:
+        if not isinstance(value, str):
+            raise ValueError("category must be a string")
         normalized = value.strip().lower()
         if normalized not in ALLOWED_CATEGORIES:
             raise ValueError(
@@ -163,13 +166,15 @@ def normalize_and_validate_category(cls, value: str) -> str:
             )
         return normalized
 
-@field_validator("tags")
-@classmethod
-def normalize_tags(cls, value: list[str]) -> list[str]:
+    @field_validator("tags")
+    @classmethod
+    def normalize_tags(cls, value: list[str]) -> list[str]:
         normalized_tags = []
         seen = set()
 
         for tag in value:
+            if not isinstance(tag, str):
+                raise ValueError("tags must contain only strings")
             normalized = tag.strip().lower()
 
             if not normalized:
@@ -183,19 +188,6 @@ def normalize_tags(cls, value: list[str]) -> list[str]:
             normalized_tags.append(normalized)
 
         return normalized_tags
-
-@model_validator(mode="after")
-def validate_work_note_has_work_tag(self):
-        # model_validator is needed here because this rule depends on
-        # both category and tags at the same time.
-        if self.category == "work" and "work" not in self.tags:
-            raise ValueError("work notes must include the 'work' tag")
-        return self
-
-
-
-
-
 class NoteUpdate(BaseModel):
     model_config = ConfigDict(
         str_strip_whitespace=True,
@@ -226,6 +218,8 @@ class NoteUpdate(BaseModel):
     def normalize_and_validate_category(cls, value: str | None) -> str | None:
         if value is None:
             return value
+        if not isinstance(value, str):
+            raise ValueError("category must be a string")
 
         normalized = value.strip().lower()
         if normalized not in ALLOWED_CATEGORIES:
@@ -244,6 +238,8 @@ class NoteUpdate(BaseModel):
         seen = set()
 
         for tag in value:
+            if not isinstance(tag, str):
+                raise ValueError("tags must contain only strings")
             normalized = tag.strip().lower()
 
             if not normalized:
@@ -257,15 +253,6 @@ class NoteUpdate(BaseModel):
             normalized_tags.append(normalized)
 
         return normalized_tags
-
-    @model_validator(mode="after")
-    def validate_work_note_has_work_tag(self):
-        if self.category == "work" and self.tags is not None and "work" not in self.tags:
-            raise ValueError("work notes must include the 'work' tag")
-        return self
-
-
-
 class NoteResponse(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
@@ -384,8 +371,8 @@ def list_notes(
     category: Optional[str] = None,
     search: Optional[str] = None,
     tag: Optional[str] = None,
-    created_after: Optional[str] = None,
-    created_before: Optional[str] = None,
+    created_after: Optional[datetime] = None,
+    created_before: Optional[datetime] = None,
 ) -> list[NoteResponse]:
     notes = session.exec(select(Note)).all()
 
@@ -410,13 +397,13 @@ def list_notes(
     if created_after:
         notes = [
             note for note in notes
-            if note.created_at.isoformat() >= created_after
+            if note.created_at >= created_after
         ]
 
     if created_before:
         notes = [
             note for note in notes
-            if note.created_at.isoformat() <= created_before
+            if note.created_at <= created_before
         ]
 
     return [note_to_response(note) for note in notes]

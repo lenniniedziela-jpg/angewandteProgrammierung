@@ -56,7 +56,8 @@ _Explain how you overcame the challenges or what help you needed._
 
 #### 1. ✅ What did I accomplish?
 
-Am ersten Tag habe ich es geschafft die Umgebung für das Modul zu schaffen und erste erkenntnisse aus meinen Challenges geschlossen. Auch habe ich die erste aufgabe gemeistert in dem ich noch hinzugefügt habe das eine Zahl nach dem namen geaddet werden kann und diese bei eingabe mit mal 2 multipliziert wurde im quelltext ausgegeben wurde. 
+Am ersten Tag habe ich es geschafft die Umgebung für das Modul zu schaffen also uv installiert, fast Api installiert und erste erkenntnisse aus meinen Challenges geschlossen. Auch habe ich die erste aufgabe gemeistert in dem ich noch hinzugefügt habe das eine Zahl nach dem namen geaddet werden kann und diese bei eingabe mit mal 2 multipliziert wurde im quelltext ausgegeben wurde. 
+- Verstanden was eine API ist und erstes grundlegendes wissen angeeignet 
 
 
 
@@ -76,6 +77,7 @@ Da wusste ich noch nicht das alles was nach einem return steht und die bedinung 
 #### 3. 💡 How did I overcome them?
 
 Das habe ich dann mit hilfe von ChatGPT und Unterlagen aus der Vorlesung Grundlagen der Programmierung gelöst bekommen.
+Dadruch habe ich ein grundlegendes Prinzipip der Programmierung verstanden 
 
 
 
@@ -92,11 +94,16 @@ Noch auf die Notes eingehen, da aber ertsmal verstehen warum und wie und was
 
 
 
+
+
 ---
 
 #### 2. 🚧 What challenges did I face?
 
-
+Die erwiterung der notes Funktionen also die Hausaufgabe. 
+Sie ist mir am Anfang schwer gefallen da ich erstmal wieder rein kommen musste und es relativ viel auf einmal war in das Programmieren bzw. das verstehen dahinter. 
+Das verstehen von der Anwendung im Alltag der Notes Funktion also warum braucht man das bzw. wer
+Generell viel Logik und Verständnis Fragen die offen sind 
 
 
 
@@ -104,8 +111,10 @@ Noch auf die Notes eingehen, da aber ertsmal verstehen warum und wie und was
 ---
 
 #### 3. 💡 How did I overcome them?
-
-
+nach dem man aber erkennt das es meistens ein Wiederkehrendes Muster ist wenn man etwas erweitern möchte.
+code in GitHub hat geholfen als Anhaltspunkt
+KI als Sparring Partne um zu vertsehen was der Code macht und welcher befehl was bewegt
+Offene Frage ist noch der Anwendungsfall, da kann ich mich noch nicht dahinter denken 
 
 
 
@@ -116,15 +125,19 @@ Noch auf die Notes eingehen, da aber ertsmal verstehen warum und wie und was
 
 #### 1. ✅ What did I accomplish?
 
-
-
+-alles in plural bei benennung
+-parameter sind optional
+SQL daten bank und SQL Lite Installiert und in den Code eingeblößt
+Verstanden das programmieren generell viel Probieren und Best Practice ist und auch unübersichtlich werden kann auch schon bei ein paar hundert zeilen Code
+Verstanden das das Modul nicht gezielt das eine Lernen soll sondern viele Anwendungsbeispiele in allen möglichen bereichen.
 
 
 
 ---
 
 #### 2. 🚧 What challenges did I face?
-
+Bei den aufgaben war es schon sehr viel auf einmal, dabei ist es mir schwer gefallen alles zu verstehen was ich da grade mache und warum es gemacht wird. 
+Die übersicht zu behalten 
 
 
 
@@ -133,6 +146,8 @@ Noch auf die Notes eingehen, da aber ertsmal verstehen warum und wie und was
 ---
 
 #### 3. 💡 How did I overcome them?
+Die Aufgaben habe ich durch Unterlagen, erklärungen in Youtube videos und KI als Sparring partner gemeistert. 
+Bei der Übersicht habe ich immer noch meine Probleme, aber das ist dann so ein fall von best Practice und gewöhnung
 
 
 
@@ -147,6 +162,11 @@ Noch auf die Notes eingehen, da aber ertsmal verstehen warum und wie und was
 
 #### 1. ✅ What did I accomplish?
 
+pytest geschrieben und diese auch passed
+Gruppenarbeit und dadruch austausch wie der Code bei den anderen aussieht und verbesserungen am Code vorgenommen 
+Die Pytest Testfiles ausgetauscht 
+Verstanden wie das Terminal funktioniert, wenn in dem einen main.py läuft und in dem anderen der Bash uv run pytest test_main.py -v ausgeführt wird testet er die aktive file im andern Termianl also main.py
+Faker eingebaut und benutzt
 
 
 
@@ -156,16 +176,16 @@ Noch auf die Notes eingehen, da aber ertsmal verstehen warum und wie und was
 
 #### 2. 🚧 What challenges did I face?
 
-
-
+Verstehen was pytest macht und wie es funktioniert und was die Codes machen in pytest
+Mit den test die wir uns gegenseitig schicken sollten, da hat bei den Tests dann nicht alles passed
 
 
 
 ---
 
 #### 3. 💡 How did I overcome them?
-
-
+Ki für die Fragen zu den Pytest und wie sie funktionieren
+In der Gruppe nach lösungen gesucht um die tests passed zu bekommen
 
 
 
@@ -236,8 +256,11 @@ Noch auf die Notes eingehen, da aber ertsmal verstehen warum und wie und was
 
 #### 1. ✅ What did I accomplish?
 
+Prüfungsleitsung: Das alle tests passen und dann erklären was nicht passed hat und dann warum und den Kontest zu erklären näher drauf eingehen was das Problem war und wie man es korrigiert hat. 
+Also code bzw. chat suchen Anpassen und schauen was schlecht läuft.
+Nach der Sassion heute eien ganz einfache Stream lit, hausaufgabe ist es Front end zu bauen mit 1 - 2 funktiononalitäten
 
-
+Heute haben wir uns dem Frontend angenommen, wir haben ersteinmal Streamlit in die Umgebungen Installiert und die ersten Buttons eingebaut, auch das Logische hinter Streamlit wurde klar
 
 
 
