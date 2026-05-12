@@ -115,7 +115,7 @@ print(response.json())
 
 ## Hinweis zur Validierung
 
-Wenn die API beim Erstellen `422 Unprocessable Entity` zurueckgibt, liegt das meistens an ungueltigen Eingaben:
+Wenn die API beim Erstellen `422 Unprocessable Entity` zurückgibt, liegt das meistens an ungültigen Eingaben:
 
 - `title` ist zu kurz oder leer
 - `content` ist leer
@@ -124,7 +124,7 @@ Wenn die API beim Erstellen `422 Unprocessable Entity` zurueckgibt, liegt das me
 
 ## Projektziel
 
-Die API eignet sich gut als einfache Uebung fuer:
+Die API eignet sich gut als einfache Übung für:
 
 - FastAPI-Grundlagen
 - Arbeiten mit Request- und Response-Daten
