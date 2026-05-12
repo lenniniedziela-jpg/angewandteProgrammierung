@@ -1,4 +1,3 @@
 # API Project
 
-
-"readme = README.md"
+Ich brauche dringen Hilfe, meine Readme ist nicht in großbuchstaben
