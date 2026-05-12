@@ -290,7 +290,8 @@ Idee: ich lasse alle gespeicherten Notes anzeigen, Problem dabei war das erstens
 
 #### 1. ✅ What did I accomplish?
 
-
+Aufgeräumt: Gitignore 
+Readme: Erklärung wie man API Startet, wie sieht ein python code aus mit man eine Notiz anlegen und abholen kann ( testen das die Codes wirklich funktionieren)
 
 
 
