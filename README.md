@@ -10,7 +10,7 @@ Jede Notiz hat:
 - eine automatisch vergebene `id`
 - ein `created_at` Datum
 
-Die Daten werden in einer SQLite-Datenbank gespeichert. Beim ersten Start koennen vorhandene Eintraege aus `data/notes.json` in die Datenbank uebernommen werden.
+Die Daten werden in einer SQLite-Datenbank gespeichert. Beim ersten Start können vorhandene Einträge aus `data/notes.json` in die Datenbank uebernommen werden.
 
 ## API starten
 
@@ -20,7 +20,7 @@ Im Projektordner:
 uv run python -m fastapi dev main.py
 ```
 
-Danach laeuft die API lokal unter:
+Danach läuft die API lokal unter:
 
 ```text
 http://127.0.0.1:8000
