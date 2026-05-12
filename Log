@@ -268,8 +268,9 @@ Heute haben wir uns dem Frontend angenommen, wir haben ersteinmal Streamlit in d
 
 #### 2. 🚧 What challenges did I face?
 Hausaufgabe: Es war schwer sich erstmal da rein zu finden und die ganzen Codes zu finden die man braucht, ich habe dann ein paar fehlermeldungen bekommen wie z.b.  127.0.0.1:62571 - "POST /notes HTTP/1.1" 422 
+Fehler lag daran das die alle Felder, Title, Kategorie usw... vorgegebene Parameter hatten deshalb kam die ganze zeot 422 weil es nicht akzeptiert wurde. 
 zu verstehen das das feld tags in eine liste umgewandelt werden muss weil die Api list[str] erwartete hat ein bisschen gedauert
-
+Idee: ich lasse alle gespeicherten Notes anzeigen, Problem dabei war das erstens docs her musste weil ich commands gebraucht habe die ich nicht kannte und 2. das es eine flut an daten ist allein bei ein paar 100 notes schon. Es war schwer da eine Logische Lösung zu finden 
 
 
 
