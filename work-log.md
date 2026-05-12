@@ -66,7 +66,7 @@ Am ersten Tag habe ich es geschafft die Umgebung für das Modul zu schaffen also
 
 #### 2. 🚧 What challenges did I face?
 
-Die challenge ist beim erledigen der Aufgabe entstanden da dort erst fehlermeldungen kamen da ich einfach den Codeblock der namen kopiert habe und unterhalb weider eingefügt habe blos mit "number" statts "name".
+Die challenge ist beim erledigen der Aufgabe entstanden da dort erst fehlermeldungen kamen da ich einfach den Codeblock der namen kopiert habe und unterhalb weiter eingefügt habe blos mit "number" statts "name".
 Da wusste ich noch nicht das alles was nach einem return steht und die bedinung des returns erfüllt wurde nicht mehr geltend ist. 
 
 
@@ -278,7 +278,7 @@ Idee: ich lasse alle gespeicherten Notes anzeigen, Problem dabei war das erstens
 ---
 
 #### 3. 💡 How did I overcome them?
-
+Streamlit doku, CodeX 5.5 (GPT Model), 
 
 
 
@@ -291,10 +291,11 @@ Idee: ich lasse alle gespeicherten Notes anzeigen, Problem dabei war das erstens
 #### 1. ✅ What did I accomplish?
 
 Aufgeräumt: Gitignore 
-Readme: Erklärung wie man API Startet, wie sieht ein python code aus mit man eine Notiz anlegen und abholen kann ( testen das die Codes wirklich funktionieren)
+Readme: kurzer Überblick !!Erklärung wie man API Startet, wie sieht ein python code aus mit man eine Notiz anlegen und abholen kann ( testen das die Codes wirklich funktionieren)
+test_main.py muss durchlaufen, andere tests auch noch 
+Die Umgebung so angepasst das es für die Prüfungsabgabe passt
 
-
-
+Abschließende meinung 
 
 ---
 
@@ -308,7 +309,8 @@ Readme: Erklärung wie man API Startet, wie sieht ein python code aus mit man ei
 ---
 
 #### 3. 💡 How did I overcome them?
-
+Abschließend zu CodeX, dass Problem mit Ki in dem fall ist das man sehr schnell den überblick und das. verständnis verliert wenn man es zum coden benutzt, deshalb habe ich das gerne selber gemacht und mir lieber erklären lassen was grade passiert und wie man es angeht damit ich immer nachvollziehen kann was gemacht wird. 
+für die erkennung und erklärung von Fehlern ist es allerdings sehr sehr gut
 
 
 
