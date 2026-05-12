@@ -112,7 +112,7 @@ class Tag(SQLModel, table=True):
 
 
 
-ALLOWED_CATEGORIES = {"work", "personal", "school", "ideas", "general"}
+ALLOWED_CATEGORIES = {"work", "personal", "school", "ideas", "general", "Essen"}
 
 
 class NoteCreate(BaseModel):

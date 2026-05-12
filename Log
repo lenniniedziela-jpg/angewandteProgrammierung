@@ -267,7 +267,8 @@ Heute haben wir uns dem Frontend angenommen, wir haben ersteinmal Streamlit in d
 ---
 
 #### 2. 🚧 What challenges did I face?
-
+Hausaufgabe: Es war schwer sich erstmal da rein zu finden und die ganzen Codes zu finden die man braucht, ich habe dann ein paar fehlermeldungen bekommen wie z.b.  127.0.0.1:62571 - "POST /notes HTTP/1.1" 422 
+zu verstehen das das feld tags in eine liste umgewandelt werden muss weil die Api list[str] erwartete hat ein bisschen gedauert
 
 
 
