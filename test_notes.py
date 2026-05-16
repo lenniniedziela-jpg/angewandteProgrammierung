@@ -3,7 +3,7 @@ import requests
 BASE_URL = "http://127.0.0.1:8000"
 
 # Hilfsfunktion: erstellt eine Test-Note und gibt die ID zurück
-def create_test_note(title="Test Note", content="Test Content", category="Testing", tags=["test"]):
+def create_test_note(title="Test Note", content="Test Content", category="general", tags=["test"]):
     response = requests.post(f"{BASE_URL}/notes", json={
         "title": title,
         "content": content,
@@ -19,7 +19,7 @@ def create_test_note(title="Test Note", content="Test Content", category="Testin
 
 def test_create_note():
     """Test: Note erstellen"""
-    response = create_test_note(title="Neue Note", category="Work", tags=["pytest"])
+    response = create_test_note(title="Neue Note", category="work", tags=["pytest"])
 
     assert response.status_code == 201
     data = response.json()
@@ -81,22 +81,22 @@ def test_delete_note():
 
 def test_filter_by_category():
     """Test: Notes nach Kategorie filtern"""
-    # 3 Notes in der Kategorie "FilterTest" erstellen
+    # 3 Notes in der Kategorie "ideas" erstellen
     for i in range(3):
-        create_test_note(title=f"Filter Note {i}", category="FilterTest")
+        create_test_note(title=f"Filter Note {i}", category="ideas")
 
-    response = requests.get(f"{BASE_URL}/notes?category=FilterTest")
+    response = requests.get(f"{BASE_URL}/notes?category=ideas")
 
     assert response.status_code == 200
     notes = response.json()
     assert len(notes) >= 3
     for note in notes:
-        assert note["category"] == "FilterTest"
+        assert note["category"] == "ideas"
 
 
 def test_filter_by_search():
     """Test: Notes per Suchbegriff filtern"""
-    create_test_note(title="Suchbegriff XYZ123", content="Inhalt", category="Search")
+    create_test_note(title="Suchbegriff XYZ123", content="Inhalt", category="general")
 
     response = requests.get(f"{BASE_URL}/notes?search=XYZ123")
 
@@ -122,15 +122,15 @@ def test_filter_by_tag():
 
 def test_combined_filters():
     """Test: Mehrere Filter gleichzeitig"""
-    create_test_note(title="Combined Filter Meeting", category="CombinedTest", tags=["urgent"])
+    create_test_note(title="Combined Filter Meeting", category="ideas", tags=["urgent"])
 
-    response = requests.get(f"{BASE_URL}/notes?category=CombinedTest&tag=urgent&search=Meeting")
+    response = requests.get(f"{BASE_URL}/notes?category=ideas&tag=urgent&search=Meeting")
 
     assert response.status_code == 200
     notes = response.json()
     assert len(notes) >= 1
     for note in notes:
-        assert note["category"] == "CombinedTest"
+        assert note["category"] == "ideas"
         assert "urgent" in note["tags"]
 
 
@@ -178,7 +178,7 @@ def test_delete_nonexistent_note():
 
 def test_notes_statistics():
     """Test: /notes/stats gibt korrekte Struktur zurück"""
-    create_test_note(title="Stats Note", category="StatsTest", tags=["stats"])
+    create_test_note(title="Stats Note", category="general", tags=["stats"])
 
     response = requests.get(f"{BASE_URL}/notes/stats")
 
@@ -193,34 +193,34 @@ def test_notes_statistics():
 
 def test_list_categories():
     """Test: /categories gibt sortierte Liste zurück"""
-    create_test_note(category="KategorieA")
-    create_test_note(category="KategorieB")
+    create_test_note(category="work")
+    create_test_note(category="personal")
 
     response = requests.get(f"{BASE_URL}/categories")
 
     assert response.status_code == 200
     categories = response.json()
     assert isinstance(categories, list)
-    assert "KategorieA" in categories
-    assert "KategorieB" in categories
+    assert "work" in categories
+    assert "personal" in categories
 
 
 def test_notes_by_category_endpoint():
     """Test: /categories/{cat}/notes gibt nur Notes dieser Kategorie zurück"""
-    create_test_note(title="Kategorie Endpoint Test", category="SpecialCat")
+    create_test_note(title="Kategorie Endpoint Test", category="school")
 
-    response = requests.get(f"{BASE_URL}/categories/SpecialCat/notes")
+    response = requests.get(f"{BASE_URL}/categories/school/notes")
 
     assert response.status_code == 200
     notes = response.json()
     assert len(notes) >= 1
     for note in notes:
-        assert note["category"] == "SpecialCat"
+        assert note["category"] == "school"
 
 
 def test_patch_multiple_fields():
     """Test: PATCH mit mehreren Feldern gleichzeitig"""
-    created = create_test_note(title="Multi Patch", content="Alter Inhalt", category="AltKat")
+    created = create_test_note(title="Multi Patch", content="Alter Inhalt", category="general")
     note_id = created.json()["id"]
 
     response = requests.patch(f"{BASE_URL}/notes/{note_id}", json={
@@ -232,4 +232,4 @@ def test_patch_multiple_fields():
     data = response.json()
     assert data["title"] == "Neuer Titel"
     assert data["content"] == "Neuer Inhalt"
-    assert data["category"] == "AltKat"  # unverändert
+    assert data["category"] == "general"  # unverändert

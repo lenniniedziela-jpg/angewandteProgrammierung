@@ -174,60 +174,41 @@ Ich habe mir bei Verständnisfragen zu pytest Unterstützung über KI geholt, um
 ### Day 5
 
 #### 1. ✅ What did I accomplish?
+Am fünften Tag haben wir uns intensiver mit Datenvalidierung in unserer Notes-API beschäftigt. Dabei ging es darum, die Eingaben nicht mehr einfach nur anzunehmen, sondern genauer zu prüfen, ob die Daten überhaupt sinnvoll und erlaubt sind. Wir haben dafür die Modelle `NoteCreate` und `NoteUpdate` mit Pydantic klarer aufgebaut und dabei auch festgelegt, dass keine unbekannten Felder akzeptiert werden. Für mich war das wichtig, weil ich dadurch besser verstanden habe, dass eine API nicht nur Daten entgegennimmt, sondern auch aktiv davor schützen muss, dass fehlerhafte oder unpassende Inhalte gespeichert werden.
 
-
-
-
-
-
+Zusätzlich haben wir Regeln für einzelne Felder ergänzt, zum Beispiel bei der Länge von Texten oder bei der Form von Kategorien und Tags. Besonders bei `category` und `tags` wurde deutlich, wie wichtig Normalisierung ist, also dass Eingaben vereinheitlicht und bereinigt werden, bevor sie weiterverarbeitet werden. Außerdem haben wir mit erlaubten Kategorien gearbeitet und damit ein klares Whitelist-Prinzip umgesetzt. Ein weiterer wichtiger Punkt war, dass wir nicht nur einzelne Felder geprüft haben, sondern auch Zusammenhänge zwischen ihnen. Abschließend wurde die neue Validierungslogik noch mit gezielten Tests abgesichert. Ein Teil davon ist direkt im Unterricht entstanden, anderes musste in der Hausaufgabe weitergeführt und sauber umgesetzt werden.
 ---
 
 #### 2. 🚧 What challenges did I face?
+Schwierig war für mich an diesem Tag vor allem, den Validierungscode wirklich zu verstehen und nicht nur zu übernehmen. Gerade weil manches davon technisch deutlich genauer war als in den Tagen davor, musste ich mich erst daran gewöhnen, warum bestimmte Regeln überhaupt sinnvoll sind und wo genau sie eingebaut werden müssen. Dazu kamen konkrete technische Probleme, zum Beispiel dass `sqlmodel.Field` bestimmte Parameter aus Pydantic nicht direkt akzeptiert hat. Auch beim Arbeiten am Code sind zwischenzeitlich Zeilen verloren gegangen, was die Fehlersuche zusätzlich erschwert hat.
 
-
-
-
-
-
+Eine weitere Herausforderung war, dass die neuen Regeln direkte Auswirkungen auf bestehende Tests hatten. Kategorien, die vorher noch funktioniert haben, waren auf einmal nicht mehr erlaubt, weil sie nicht zu den definierten Werten gepasst haben. Dadurch wurde für mich sichtbar, dass Validierung nicht nur an einer Stelle passiert, sondern Auswirkungen auf die gesamte API und die zugehörigen Tests hat.
 ---
 
 #### 3. 💡 How did I overcome them?
+Wir haben uns dazu im Kurs ausgetauscht und zusätzlich noch einmal die Vorlesungsfolien und Hilfsmaterialien genutzt, um die Unterschiede zwischen den Modellen und den Validierungsansätzen besser zu verstehen. Das technische Problem mit den Felddefinitionen konnte ich lösen, indem die Pydantic- und SQLModel-Bestandteile klar getrennt wurden. Fehlerhafte oder fehlende Stellen im Code habe ich anschließend systematisch gesucht und wieder ergänzt. Auch die Tests wurden Schritt für Schritt an die neuen Regeln angepasst, damit wieder ein einheitlicher Stand entsteht.
 
-
-
-
-
-
+Rückblickend habe ich an Day 5 vor allem mitgenommen, dass Validierung ein sehr wichtiger Teil einer guten API ist. 
 ---
 
 ### Day 6
 
 #### 1. ✅ What did I accomplish?
+Am sechsten Tag haben wir uns mit zwei Themen beschäftigt, die beide wichtig für sauberen und zuverlässigen Code sind: Decorators und Testing. Im ersten Teil haben wir uns mit einem Class Decorator beschäftigt und dabei verstanden, wie man das Verhalten von Funktionen erweitern kann, ohne ihre eigentliche Logik direkt umzuschreiben. Für mich war das vor allem deshalb interessant, weil ich dadurch gesehen habe, wie man zusätzliche Aufgaben wie Logging oder Laufzeitmessung eleganter vom eigentlichen Programmcode trennen kann.
 
-
-
-
-
-
+Im zweiten Teil ging es um die Test-Suite. Wir haben eine neue Referenz-Testdatei eingebunden, ausgeführt und anschließend analysiert, warum bestimmte Tests noch nicht durchlaufen. Dadurch mussten wir unsere API an mehreren Stellen anpassen, zum Beispiel bei Datumsfiltern oder bei der Ausgabe von Statistiken. Außerdem wurde klar, dass unsere bisherige Implementierung zwar an vielen Stellen schon gut war, aber nicht automatisch alle Erwartungen einer externen Test-Suite erfüllt. Am Ende haben wir es geschafft, die Referenztests vollständig grün zu bekommen. Auch zusätzliche lokale Tests wurden noch einmal geprüft, damit frühere Funktionen nicht unbemerkt kaputtgehen. Ein Teil davon entstand im Unterricht, vieles wurde aber in der Hausaufgabe weiter vertieft.
 ---
 
 #### 2. 🚧 What challenges did I face?
+Die größte Schwierigkeit war für mich, dass die neue Test-Suite teilweise andere Erwartungen hatte als unsere bisherige Lösung. Dadurch gab es viele fehlgeschlagene Tests, obwohl der Code für mich zunächst trotzdem nachvollziehbar gewirkt hat. Besonders verwirrend war, dass einige Regeln, die vorher sinnvoll erschienen, an anderer Stelle wieder zu Problemen geführt haben. Dazu kam, dass bestimmte Funktionen wie Datumsfilter in `GET /notes` noch gar nicht vorhanden waren, obwohl sie von den Tests bereits vorausgesetzt wurden.
 
-
-
-
-
-
+Ein weiteres Problem war, dass Tests mit Requests lokal nicht immer zuverlässig waren, wenn gerade kein passender Server lief oder wenn ältere Demo-Funktionen noch mit der aktuellen Notes-API vermischt waren. Dadurch war nicht immer sofort klar, ob das Problem im eigentlichen Code lag oder eher an der Testumgebung.
 ---
 
 #### 3. 💡 How did I overcome them?
+Wir sind die Fehlermeldungen aus `pytest` Schritt für Schritt durchgegangen und haben versucht, sie nicht nur einzeln zu beheben, sondern nach ihren Ursachen zu ordnen. Das hat mir geholfen zu verstehen, welche Fehler zusammenhängen und welche Änderungen an der API wirklich notwendig sind. 
 
-
-
-
-
-
----
+Für mich war Day 6 besonders lehrreich, weil ich Tests generell kennengelernt habe und dadurch verstanden habe, dass Tests nicht nur Kontrolle bedeuten, sondern auch helfen, das Verhalten der eigenen API viel genauer zu durchdenken. 
 
 ## Week 3
 
@@ -268,31 +249,25 @@ Rückblickend habe ich an diesem Tag besonders mitgenommen, dass Frontend und Ba
 ### Day 8
 
 #### 1. ✅ What did I accomplish?
-Aufräum arbeiten: Wir haben einzelne files und deren Aufgabe geklärt, wie z.b. Gitignore und in welche ordner man sie packen kann bzw. sollte und das sie begriffe in sich haben die Ignoriert werden.
-Die prüfungs relevanten files angepasst auf namen und geschaut ob alles vorhanden ist
-Readme wurde angepasst und aufgearbeitet da es der erste eindruck eines Projektes wäre, es ist dafür da die funktionene zu erklären, wie man sie Startet oder in seinen Code einbaut, evtl welche bedingungen eine Umgebung erfüllen muss und Code schnipsel für eine Demo oder eine schnelle Integration der Funktion. 
+Am achten Tag ging es für uns vor allem darum, das Projekt sauberer und prüfungsreif zu machen. Wir haben uns mit Aufräumarbeiten im Repository beschäftigt und dabei besser verstanden, welche Dateien welche Aufgabe haben. Dazu gehörte zum Beispiel die .gitignore und die Frage, welche Dateien oder Inhalte dort eingetragen werden sollten, damit sie nicht unnötig im Repository landen. Außerdem wurden die prüfungsrelevanten Dateien noch einmal angepasst und darauf überprüft, ob Namen, Struktur und Inhalte vollständig und sinnvoll sind.
 
-Prüfungsleitsung: Das alle tests passen und dann erklären was nicht passed hat und dann warum und den Kontest zu erklären näher drauf eingehen was das Problem war und wie man es korrigiert hat. 
-Also code bzw. chat suchen Anpassen und schauen was schlecht läuft.
+Ein weiterer wichtiger Teil war die Überarbeitung der README.Dadurch habe ich vertsandne dass die README nicht nur eine formale Datei ist, sondern oft den ersten Eindruck eines Projekts vermittelt. Sie soll erklären, was das Projekt macht, wie man es startet, welche Voraussetzungen es gibt und wie man die wichtigsten Funktionen nutzt. Zusätzlich stand wieder die Prüfungsleistung im Fokus, also zu prüfen, ob alle Tests passen, problematische Stellen zu erkennen und den jeweiligen Kontext eines Fehlers erklären zu können.
 
 
 
 ---
 
 #### 2. 🚧 What challenges did I face?
-Mein häufigstets Problem generell war das es mir sehr schwer gefallen ist zu verstehen was warum jetzt gemacht wird und das es häufig zu schnell ging, einfach aus dem Grund das mir der Technische Hintergrund gefhelt hat. 
-
-
-
+Mein häufigstes Problem in diesem Modul waren weniger einzelne Fehlermeldung, sondern eher das grundsätzliche Verständnis dafür, warum bestimmte Dinge genau so gemacht werden. Ich habe gemerkt, dass mir an manchen Stellen noch technischer Hintergrund fehlt und es deshalb manchmal zu schnell ging. Dadurch fiel es mir schwer, nicht nur einzelne Aufgaben zu erledigen, sondern auch den größeren Zusammenhang vollständig zu verstehen. Gerade wenn wir mehrere Dinge nacheinander angepasst haben, war es nicht immer einfach, sofort nachzuvollziehen, welche Änderung welchen Zweck erfüllt.
 
 
 ---
 
 #### 3. 💡 How did I overcome them?
 
-Abschließend zu CodeX bzw. KI, dass Problem mit Ki in dem fall ist das man sehr schnell den überblick und das verständnis verliert wenn man es zum coden benutzt bzw. vergisst zu erwähnen das nichts am code geändert werden soll sondern nur erklärt werden soll, deshalb habe ich das selber gemacht und mir lieber erklären lassen was grade passiert und wie man es angeht damit ich immer nachvollziehen kann was gemacht wird. 
-für die erkennung und erklärung von Fehlern aber auch der erklärung von verständnis Fragen meinerseits z.b. warum in dem fall eine SQL Datenbank sinn macht und was hre vorteile sind, ist es allerdings sehr sehr gut
+Rückblickend war dieser Tag für mich auch eine Art persönliches Fazit dazu, wie ich mit solchen Verständnisproblemen umgehe. Ich habe gemerkt, dass es mir am meisten hilft, wenn ich mir Zusammenhänge in Ruhe von CodeX erklären lasse und versuche, die einzelnen Schritte wirklich nachzuvollziehen, statt nur schnell zu einer Lösung zu kommen. So konnte ich besser verstehen, was im Code passiert und warum bestimmte Entscheidungen sinnvoll sind.
 
+ Mir war es wichtig, nicht nur auf das Ergebnis zu schauen, sondern den Weg dorthin mitzudenken. Besonders bei Fehlern, Verständnisfragen und technischen Entscheidungen hat mir dieses langsamere und bewusstere Vorgehen geholfen. Dadurch hatte ich das Gefühl, an diesem Tag nicht nur Aufgaben zu erledigen, sondern mein eigenes Verständnis ein Stück weiter auszubauen.
 
 
 
@@ -330,7 +305,6 @@ für die erkennung und erklärung von Fehlern aber auch der erklärung von verst
 
 
 # 🎉 Congratulations! You did it! 🎓✨
-
 
 
 

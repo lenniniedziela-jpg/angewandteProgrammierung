@@ -461,8 +461,13 @@ def get_notes_by_category(
 
 @app.get("/tags")
 def list_tags(session: SessionDep) -> list[str]:
-    tags = session.exec(select(Tag)).all()
-    return sorted(tag.name for tag in tags)
+    notes = session.exec(select(Note)).all()
+    used_tags = {
+        tag.name
+        for note in notes
+        for tag in note.tags
+    }
+    return sorted(used_tags)
 
 
 @app.get("/tags/{tag_name}/notes")
