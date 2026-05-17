@@ -175,26 +175,31 @@ Ich habe mir bei Verständnisfragen zu pytest Unterstützung über KI geholt, um
 
 #### 1. ✅ What did I accomplish?
 Am fünften Tag haben wir uns intensiver mit Datenvalidierung in unserer Notes-API beschäftigt. Dabei ging es darum, die Eingaben nicht mehr einfach nur anzunehmen, sondern genauer zu prüfen, ob die Daten überhaupt sinnvoll und erlaubt sind. Wir haben dafür die Modelle NoteCreate und NoteUpdate mit Pydantic klarer aufgebaut und dabei auch festgelegt, dass keine unbekannten Felder akzeptiert werden. Für mich war das wichtig, weil ich dadurch besser verstanden habe, dass eine API nicht nur Daten entgegennimmt, sondern auch aktiv davor schützen muss, dass fehlerhafte oder unpassende Inhalte gespeichert werden. Zusätzlich haben wir Regeln für einzelne Felder ergänzt, zum Beispiel bei der Länge von Texten oder bei der Form von Kategorien und Tags. Besonders bei category und tags wurde deutlich, wie wichtig Normalisierung ist, also dass Eingaben vereinheitlicht und bereinigt werden, bevor sie weiterverarbeitet werden. Außerdem haben wir mit erlaubten Kategorien gearbeitet und damit ein klares Whitelist-Prinzip umgesetzt. Ein weiterer wichtiger Punkt war, dass wir nicht nur einzelne Felder geprüft haben, sondern auch Zusammenhänge zwischen ihnen. Abschließend wurde die neue Validierungslogik noch mit gezielten Tests abgesichert. Ein Teil davon ist direkt im Unterricht entstanden, anderes musste in der Hausaufgabe weitergeführt und sauber umgesetzt werden.
+
 ---
 
 #### 2. 🚧 What challenges did I face?
 Schwierig war für mich an diesem Tag vor allem, den Validierungscode wirklich zu verstehen und nicht nur zu übernehmen. Gerade weil manches davon technisch deutlich genauer war als in den Tagen davor, musste ich mich erst daran gewöhnen, warum bestimmte Regeln überhaupt sinnvoll sind und wo genau sie eingebaut werden müssen. Dazu kamen konkrete technische Probleme, zum Beispiel dass sqlmodel.Field bestimmte Parameter aus Pydantic nicht direkt akzeptiert hat. Auch beim Arbeiten am Code sind zwischenzeitlich Zeilen verloren gegangen, was die Fehlersuche zusätzlich erschwert hat. Eine weitere Herausforderung war, dass die neuen Regeln direkte Auswirkungen auf bestehende Tests hatten. Kategorien, die vorher noch funktioniert haben, waren auf einmal nicht mehr erlaubt, weil sie nicht zu den definierten Werten gepasst haben. Dadurch wurde für mich sichtbar, dass Validierung nicht nur an einer Stelle passiert, sondern Auswirkungen auf die gesamte API und die zugehörigen Tests hat.
+
 ---
 
 #### 3. 💡 How did I overcome them?
 Wir haben uns dazu im Kurs ausgetauscht und zusätzlich noch einmal die Vorlesungsfolien und Hilfsmaterialien genutzt, um die Unterschiede zwischen den Modellen und den Validierungsansätzen besser zu verstehen. Das technische Problem mit den Felddefinitionen konnte ich lösen, indem die Pydantic- und SQLModel-Bestandteile klar getrennt wurden. Fehlerhafte oder fehlende Stellen im Code habe ich anschließend systematisch gesucht und wieder ergänzt. Auch die Tests wurden Schritt für Schritt an die neuen Regeln angepasst, damit wieder ein einheitlicher Stand entsteht.
 
 Rückblickend habe ich an Day 5 vor allem mitgenommen, dass Validierung ein sehr wichtiger Teil einer guten API ist. 
+
 ---
 
 ### Day 6
 
 #### 1. ✅ What did I accomplish?
 Am sechsten Tag haben wir uns mit zwei Themen beschäftigt, die beide wichtig für sauberen und zuverlässigen Code sind: Decorators und Testing. Im ersten Teil haben wir uns mit einem Class Decorator beschäftigt und dabei verstanden, wie man das Verhalten von Funktionen erweitern kann, ohne ihre eigentliche Logik direkt umzuschreiben. Für mich war das vor allem deshalb interessant, weil ich dadurch gesehen habe, wie man zusätzliche Aufgaben wie Logging oder Laufzeitmessung eleganter vom eigentlichen Programmcode trennen kann. Im zweiten Teil ging es um die Test-Suite. Wir haben eine neue Referenz-Testdatei eingebunden, ausgeführt und anschließend analysiert, warum bestimmte Tests noch nicht durchlaufen. Dadurch mussten wir unsere API an mehreren Stellen anpassen, zum Beispiel bei Datumsfiltern oder bei der Ausgabe von Statistiken. Außerdem wurde klar, dass unsere bisherige Implementierung zwar an vielen Stellen schon gut war, aber nicht automatisch alle Erwartungen einer externen Test-Suite erfüllt. Am Ende haben wir es geschafft, die Referenztests vollständig grün zu bekommen. Auch zusätzliche lokale Tests wurden noch einmal geprüft, damit frühere Funktionen nicht unbemerkt kaputtgehen. Ein Teil davon entstand im Unterricht, vieles wurde aber in der Hausaufgabe weiter vertieft.
+
 ---
 
 #### 2. 🚧 What challenges did I face?
 Die größte Schwierigkeit war für mich, dass die neue Test-Suite teilweise andere Erwartungen hatte als unsere bisherige Lösung. Dadurch gab es viele fehlgeschlagene Tests, obwohl der Code für mich zunächst trotzdem nachvollziehbar gewirkt hat. Besonders verwirrend war, dass einige Regeln, die vorher sinnvoll erschienen, an anderer Stelle wieder zu Problemen geführt haben. Dazu kam, dass bestimmte Funktionen wie Datumsfilter in GET /notes noch gar nicht vorhanden waren, obwohl sie von den Tests bereits vorausgesetzt wurden. Ein weiteres Problem war, dass Tests mit Requests lokal nicht immer zuverlässig waren, wenn gerade kein passender Server lief oder wenn ältere Demo-Funktionen noch mit der aktuellen Notes-API vermischt waren. Dadurch war nicht immer sofort klar, ob das Problem im eigentlichen Code lag oder eher an der Testumgebung.
+
 ---
 
 #### 3. 💡 How did I overcome them?
@@ -289,7 +294,6 @@ Rückblickend war dieser Tag für mich auch eine Art persönliches Fazit dazu, w
 
 
 # 🎉 Congratulations! You did it! 🎓✨
-
 
 
 
