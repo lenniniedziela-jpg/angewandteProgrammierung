@@ -1,6 +1,6 @@
 # Work Log
 
-**Student Name:** 
+Student Name:
 
 Instructions: Fill out one log for each course day. Content to consider: Course Sessions + Assignment
 
@@ -12,7 +12,7 @@ Instructions: Fill out one log for each course day. Content to consider: Course 
 
 _Reflect on the activities, exercises, and work you completed today._
 
-**Guiding questions:**
+Guiding questions:
 - What topics or concepts did you work with?
 - What exercises or projects did you complete?
 - What tools or technologies did you use?
@@ -26,7 +26,7 @@ _Reflect on the activities, exercises, and work you completed today._
 
 _Describe any difficulties, obstacles, or confusing moments you encountered._
 
-**Guiding questions:**
+Guiding questions:
 - What was difficult to understand?
 - Where did you get stuck?
 - What errors or problems did you face?
@@ -41,7 +41,7 @@ _Describe any difficulties, obstacles, or confusing moments you encountered._
 
 _Explain how you overcame the challenges or what help you needed._
 
-**Guiding questions:**
+Guiding questions:
 - What strategies did you try?
 - Who or what helped you (instructor, classmates, documentation)?
 - What did you learn from solving the problem?
@@ -305,7 +305,6 @@ Rückblickend war dieser Tag für mich auch eine Art persönliches Fazit dazu, w
 
 
 # 🎉 Congratulations! You did it! 🎓✨
-
 
 
 

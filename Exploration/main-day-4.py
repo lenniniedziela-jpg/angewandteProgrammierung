@@ -110,9 +110,3 @@ def check_adult(age: int):
  
 
 
-#Die Umgebung so angepasst das es für die Prüfungsabgabe passt
-
-
-
-
-#Secreenshot in sc noch mal anschauen und schaune ob alles Prüungsreif ist
