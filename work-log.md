@@ -10,7 +10,7 @@ Instructions: Fill out one log for each course day. Content to consider: Course 
 
 ## 1. ✅ What did I accomplish?
 
-_Reflect on the activities, exercises, and work you completed today._
+Reflect on the activities, exercises, and work you completed today.
 
 Guiding questions:
 - What topics or concepts did you work with?
@@ -24,7 +24,7 @@ Guiding questions:
 
 ## 2. 🚧 What challenges did I face?
 
-_Describe any difficulties, obstacles, or confusing moments you encountered._
+Describe any difficulties, obstacles, or confusing moments you encountered.
 
 Guiding questions:
 - What was difficult to understand?
@@ -39,7 +39,7 @@ Guiding questions:
 
 ## 3. 💡 How did I overcome them?
 
-_Explain how you overcame the challenges or what help you needed._
+Explain how you overcame the challenges or what help you needed.
 
 Guiding questions:
 - What strategies did you try?
@@ -56,7 +56,7 @@ Guiding questions:
 
 #### 1. ✅ What did I accomplish?
 
-Am ersten Tag habe ich vor allem die technische Grundlage für das Modul geschaffen. Ich habe meine Entwicklungsumgebung eingerichtet, also unter anderem `uv` und FastAPI installiert, und damit die Basis geschaffen, um überhaupt mit der API-Entwicklung arbeiten zu können. Außerdem habe ich mich zum ersten Mal intensiver damit beschäftigt, was eine API eigentlich ist und wie sie grundsätzlich funktioniert. Im praktischen Teil habe ich bereits die erste Aufgabe erweitert. Ich habe nicht nur einen Namen ausgeben lassen, sondern zusätzlich eine Zahl eingebaut, die im Code verdoppelt und anschließend mit ausgegeben wurde. Dadurch habe ich direkt gemerkt, dass schon kleine Änderungen im Code Auswirkungen auf das Verhalten eines Programms haben und dass man dabei genau verstehen muss, was an welcher Stelle passiert.
+Am ersten Tag habe ich vor allem die technische Grundlage für das Modul geschaffen. Ich habe meine Entwicklungsumgebung eingerichtet, also unter anderem uv und FastAPI installiert, und damit die Basis geschaffen, um überhaupt mit der API-Entwicklung arbeiten zu können. Außerdem habe ich mich zum ersten Mal intensiver damit beschäftigt, was eine API eigentlich ist und wie sie grundsätzlich funktioniert. Im praktischen Teil habe ich bereits die erste Aufgabe erweitert. Ich habe nicht nur einen Namen ausgeben lassen, sondern zusätzlich eine Zahl eingebaut, die im Code verdoppelt und anschließend mit ausgegeben wurde. Dadurch habe ich direkt gemerkt, dass schon kleine Änderungen im Code Auswirkungen auf das Verhalten eines Programms haben und dass man dabei genau verstehen muss, was an welcher Stelle passiert.
 
 
 
@@ -174,11 +174,11 @@ Ich habe mir bei Verständnisfragen zu pytest Unterstützung über KI geholt, um
 ### Day 5
 
 #### 1. ✅ What did I accomplish?
-Am fünften Tag haben wir uns intensiver mit Datenvalidierung in unserer Notes-API beschäftigt. Dabei ging es darum, die Eingaben nicht mehr einfach nur anzunehmen, sondern genauer zu prüfen, ob die Daten überhaupt sinnvoll und erlaubt sind. Wir haben dafür die Modelle `NoteCreate` und `NoteUpdate` mit Pydantic klarer aufgebaut und dabei auch festgelegt, dass keine unbekannten Felder akzeptiert werden. Für mich war das wichtig, weil ich dadurch besser verstanden habe, dass eine API nicht nur Daten entgegennimmt, sondern auch aktiv davor schützen muss, dass fehlerhafte oder unpassende Inhalte gespeichert werden. Zusätzlich haben wir Regeln für einzelne Felder ergänzt, zum Beispiel bei der Länge von Texten oder bei der Form von Kategorien und Tags. Besonders bei `category` und `tags` wurde deutlich, wie wichtig Normalisierung ist, also dass Eingaben vereinheitlicht und bereinigt werden, bevor sie weiterverarbeitet werden. Außerdem haben wir mit erlaubten Kategorien gearbeitet und damit ein klares Whitelist-Prinzip umgesetzt. Ein weiterer wichtiger Punkt war, dass wir nicht nur einzelne Felder geprüft haben, sondern auch Zusammenhänge zwischen ihnen. Abschließend wurde die neue Validierungslogik noch mit gezielten Tests abgesichert. Ein Teil davon ist direkt im Unterricht entstanden, anderes musste in der Hausaufgabe weitergeführt und sauber umgesetzt werden.
+Am fünften Tag haben wir uns intensiver mit Datenvalidierung in unserer Notes-API beschäftigt. Dabei ging es darum, die Eingaben nicht mehr einfach nur anzunehmen, sondern genauer zu prüfen, ob die Daten überhaupt sinnvoll und erlaubt sind. Wir haben dafür die Modelle NoteCreate und NoteUpdate mit Pydantic klarer aufgebaut und dabei auch festgelegt, dass keine unbekannten Felder akzeptiert werden. Für mich war das wichtig, weil ich dadurch besser verstanden habe, dass eine API nicht nur Daten entgegennimmt, sondern auch aktiv davor schützen muss, dass fehlerhafte oder unpassende Inhalte gespeichert werden. Zusätzlich haben wir Regeln für einzelne Felder ergänzt, zum Beispiel bei der Länge von Texten oder bei der Form von Kategorien und Tags. Besonders bei category und tags wurde deutlich, wie wichtig Normalisierung ist, also dass Eingaben vereinheitlicht und bereinigt werden, bevor sie weiterverarbeitet werden. Außerdem haben wir mit erlaubten Kategorien gearbeitet und damit ein klares Whitelist-Prinzip umgesetzt. Ein weiterer wichtiger Punkt war, dass wir nicht nur einzelne Felder geprüft haben, sondern auch Zusammenhänge zwischen ihnen. Abschließend wurde die neue Validierungslogik noch mit gezielten Tests abgesichert. Ein Teil davon ist direkt im Unterricht entstanden, anderes musste in der Hausaufgabe weitergeführt und sauber umgesetzt werden.
 ---
 
 #### 2. 🚧 What challenges did I face?
-Schwierig war für mich an diesem Tag vor allem, den Validierungscode wirklich zu verstehen und nicht nur zu übernehmen. Gerade weil manches davon technisch deutlich genauer war als in den Tagen davor, musste ich mich erst daran gewöhnen, warum bestimmte Regeln überhaupt sinnvoll sind und wo genau sie eingebaut werden müssen. Dazu kamen konkrete technische Probleme, zum Beispiel dass `sqlmodel.Field` bestimmte Parameter aus Pydantic nicht direkt akzeptiert hat. Auch beim Arbeiten am Code sind zwischenzeitlich Zeilen verloren gegangen, was die Fehlersuche zusätzlich erschwert hat. Eine weitere Herausforderung war, dass die neuen Regeln direkte Auswirkungen auf bestehende Tests hatten. Kategorien, die vorher noch funktioniert haben, waren auf einmal nicht mehr erlaubt, weil sie nicht zu den definierten Werten gepasst haben. Dadurch wurde für mich sichtbar, dass Validierung nicht nur an einer Stelle passiert, sondern Auswirkungen auf die gesamte API und die zugehörigen Tests hat.
+Schwierig war für mich an diesem Tag vor allem, den Validierungscode wirklich zu verstehen und nicht nur zu übernehmen. Gerade weil manches davon technisch deutlich genauer war als in den Tagen davor, musste ich mich erst daran gewöhnen, warum bestimmte Regeln überhaupt sinnvoll sind und wo genau sie eingebaut werden müssen. Dazu kamen konkrete technische Probleme, zum Beispiel dass sqlmodel.Field bestimmte Parameter aus Pydantic nicht direkt akzeptiert hat. Auch beim Arbeiten am Code sind zwischenzeitlich Zeilen verloren gegangen, was die Fehlersuche zusätzlich erschwert hat. Eine weitere Herausforderung war, dass die neuen Regeln direkte Auswirkungen auf bestehende Tests hatten. Kategorien, die vorher noch funktioniert haben, waren auf einmal nicht mehr erlaubt, weil sie nicht zu den definierten Werten gepasst haben. Dadurch wurde für mich sichtbar, dass Validierung nicht nur an einer Stelle passiert, sondern Auswirkungen auf die gesamte API und die zugehörigen Tests hat.
 ---
 
 #### 3. 💡 How did I overcome them?
@@ -194,11 +194,11 @@ Am sechsten Tag haben wir uns mit zwei Themen beschäftigt, die beide wichtig f�
 ---
 
 #### 2. 🚧 What challenges did I face?
-Die größte Schwierigkeit war für mich, dass die neue Test-Suite teilweise andere Erwartungen hatte als unsere bisherige Lösung. Dadurch gab es viele fehlgeschlagene Tests, obwohl der Code für mich zunächst trotzdem nachvollziehbar gewirkt hat. Besonders verwirrend war, dass einige Regeln, die vorher sinnvoll erschienen, an anderer Stelle wieder zu Problemen geführt haben. Dazu kam, dass bestimmte Funktionen wie Datumsfilter in `GET /notes` noch gar nicht vorhanden waren, obwohl sie von den Tests bereits vorausgesetzt wurden. Ein weiteres Problem war, dass Tests mit Requests lokal nicht immer zuverlässig waren, wenn gerade kein passender Server lief oder wenn ältere Demo-Funktionen noch mit der aktuellen Notes-API vermischt waren. Dadurch war nicht immer sofort klar, ob das Problem im eigentlichen Code lag oder eher an der Testumgebung.
+Die größte Schwierigkeit war für mich, dass die neue Test-Suite teilweise andere Erwartungen hatte als unsere bisherige Lösung. Dadurch gab es viele fehlgeschlagene Tests, obwohl der Code für mich zunächst trotzdem nachvollziehbar gewirkt hat. Besonders verwirrend war, dass einige Regeln, die vorher sinnvoll erschienen, an anderer Stelle wieder zu Problemen geführt haben. Dazu kam, dass bestimmte Funktionen wie Datumsfilter in GET /notes noch gar nicht vorhanden waren, obwohl sie von den Tests bereits vorausgesetzt wurden. Ein weiteres Problem war, dass Tests mit Requests lokal nicht immer zuverlässig waren, wenn gerade kein passender Server lief oder wenn ältere Demo-Funktionen noch mit der aktuellen Notes-API vermischt waren. Dadurch war nicht immer sofort klar, ob das Problem im eigentlichen Code lag oder eher an der Testumgebung.
 ---
 
 #### 3. 💡 How did I overcome them?
-Wir sind die Fehlermeldungen aus `pytest` Schritt für Schritt durchgegangen und haben versucht, sie nicht nur einzeln zu beheben, sondern nach ihren Ursachen zu ordnen. Das hat mir geholfen zu verstehen, welche Fehler zusammenhängen und welche Änderungen an der API wirklich notwendig sind. 
+Wir sind die Fehlermeldungen aus pytest Schritt für Schritt durchgegangen und haben versucht, sie nicht nur einzeln zu beheben, sondern nach ihren Ursachen zu ordnen. Das hat mir geholfen zu verstehen, welche Fehler zusammenhängen und welche Änderungen an der API wirklich notwendig sind. 
 
 Für mich war Day 6 besonders lehrreich, weil ich Tests generell kennengelernt habe und dadurch verstanden habe, dass Tests nicht nur Kontrolle bedeuten, sondern auch helfen, das Verhalten der eigenen API viel genauer zu durchdenken. 
 
@@ -289,7 +289,6 @@ Rückblickend war dieser Tag für mich auch eine Art persönliches Fazit dazu, w
 
 
 # 🎉 Congratulations! You did it! 🎓✨
-
 
 
 
